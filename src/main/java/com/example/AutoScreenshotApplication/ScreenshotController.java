@@ -1,14 +1,14 @@
-package com.example.AutoScreenShotApplication;
+package com.example.AutoScreenshotApplication;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ScreenShotController {
+public class ScreenshotController {
 
-    private final ScreenShotService screenShotService;
+    private final ScreenshotService screenShotService;
 
-    public ScreenShotController(ScreenShotService screenShotService) {
+    public ScreenshotController(ScreenshotService screenShotService) {
         this.screenShotService = screenShotService;
     }
 

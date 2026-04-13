@@ -1,4 +1,4 @@
-package com.example.AutoScreenShotApplication;
+package com.example.AutoScreenshotApplication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

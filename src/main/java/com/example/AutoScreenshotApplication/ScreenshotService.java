@@ -1,4 +1,4 @@
-package com.example.AutoScreenShotApplication;
+package com.example.AutoScreenshotApplication;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.LoadState;
@@ -15,28 +15,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @Service
-public class ScreenShotService {
+public class ScreenshotService {
 
-    private static final String SELECTOR_SUBMIT = "button:has-text('Знайти')";
-    private static final String SELECTOR_EDIT = "button:has-text('Редагувати пошук')";
-    private static final String SELECTOR_NO_SEATS = "button:has-text('без вільних місць')";
-    private static final String SELECTOR_WITH_TRANSFERS = "button:has-text('з пересадками')";
-    private static final String CITY_FROM = "Звідки";
-    private static final String CITY_WHERE = "Куди";
-    private static final String ENTER = "Enter";
-    private static final String BLANCK_SPACE = "";
-    private static final String BOOKING_PAGE = "a[href*='booking']";
-    private static final String ARCHIVE_DIR = "archive";
-    private static final String LIST_BOX = "ul[role='listbox'] li";
-    private static final boolean SUBSEQUENT = true;
-    private static final boolean NON_SUBSEQUENT = false;
-    private static final int LONG_DELAY = 2000;
-    private static final int MEDIUM_DELAY = 500;//возможно надо будет позже для уменьшения заддержек
-    private static final int SHORT_DELAY = 500;
-    private static final int KEYBOARD_IMITATION_DELAY = 10;
+
     private Playwright playwright;
     private Browser browser;
-
     @PostConstruct
     public void init() {
         playwright = Playwright.create();
@@ -74,77 +57,77 @@ public class ScreenShotService {
 
     private Page prepareBookingPage(Page page, String url) {
         page.navigate(url);
-        Page popup = page.waitForPopup(() -> page.click(BOOKING_PAGE));
+        Page popup = page.waitForPopup(() -> page.click(ApplicationConstants.BOOKING_PAGE));
         popup.waitForLoadState(LoadState.DOMCONTENTLOADED);
         return popup;
     }
 
     private void fillCitySearchFields(Page page, String cityFrom, String cityWhere, boolean isSubsequent) {
         if (isSubsequent) {
-            subSequentTypeTextIntoPlaceholder(page, CITY_FROM, cityFrom);
-            subSequentTypeTextIntoPlaceholder(page, CITY_WHERE, cityWhere);
+            subSequentTypeTextIntoPlaceholder(page, ApplicationConstants.CITY_FROM, cityFrom);
+            subSequentTypeTextIntoPlaceholder(page, ApplicationConstants.CITY_WHERE, cityWhere);
         } else {
-            firstTypeTextIntoPlaceholder(page, CITY_FROM, cityFrom);
-            firstTypeTextIntoPlaceholder(page, CITY_WHERE, cityWhere);
+            firstTypeTextIntoPlaceholder(page, ApplicationConstants.CITY_FROM, cityFrom);
+            firstTypeTextIntoPlaceholder(page, ApplicationConstants.CITY_WHERE, cityWhere);
         }
     }
 
     private void firstTypeTextIntoPlaceholder(Page page, String placeHolder, String value) {
         page.mouse().click(0, 0);
         page.getByPlaceholder(placeHolder).click();
-        page.keyboard().type(value, new Keyboard.TypeOptions().setDelay(KEYBOARD_IMITATION_DELAY));
-        page.waitForTimeout(SHORT_DELAY);
-        page.locator(LIST_BOX).first().click();
+        page.keyboard().type(value, new Keyboard.TypeOptions().setDelay(ApplicationConstants.KEYBOARD_IMITATION_DELAY));
+        page.waitForTimeout(ApplicationConstants.SHORT_DELAY);
+        page.locator(ApplicationConstants.LIST_BOX).first().click();
 
     }
 
     private void subSequentTypeTextIntoPlaceholder(Page page, String placeHolder, String value) {
 
         page.getByPlaceholder(placeHolder).click();
-        page.keyboard().type(value, new Keyboard.TypeOptions().setDelay(KEYBOARD_IMITATION_DELAY));
-        page.waitForTimeout(SHORT_DELAY);
-        page.locator(LIST_BOX).first().click();
+        page.keyboard().type(value, new Keyboard.TypeOptions().setDelay(ApplicationConstants.KEYBOARD_IMITATION_DELAY));
+        page.waitForTimeout(ApplicationConstants.SHORT_DELAY);
+        page.locator(ApplicationConstants.LIST_BOX).first().click();
     }
 
     private void performFirstSearch(Page page, String from, String where) {
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
-        page.waitForTimeout(LONG_DELAY);
-        fillCitySearchFields(page, from, where, NON_SUBSEQUENT);
-        page.click(SELECTOR_SUBMIT);
-        page.waitForTimeout(LONG_DELAY);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
+        fillCitySearchFields(page, from, where, ApplicationConstants.NON_SUBSEQUENT);
+        page.click(ApplicationConstants.SELECTOR_SUBMIT);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
         noSeatsPagePopup(page);
     }
 
     private void performSubsequentSearch(Page page, String from, String where) {
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
-        page.waitForTimeout(LONG_DELAY);
-        page.click(SELECTOR_EDIT);
-        page.waitForTimeout(LONG_DELAY);
-        fillCitySearchFields(page, from, where, SUBSEQUENT);
-        page.click(SELECTOR_SUBMIT);
-        page.waitForTimeout(LONG_DELAY);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
+        page.click(ApplicationConstants.SELECTOR_EDIT);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
+        fillCitySearchFields(page, from, where, ApplicationConstants.SUBSEQUENT);
+        page.click(ApplicationConstants.SELECTOR_SUBMIT);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
         noSeatsPagePopup(page);
     }
 
     private void noSeatsPagePopup(Page page) {
-        Locator noSeatPopup = page.locator(SELECTOR_NO_SEATS);
+        Locator noSeatPopup = page.locator(ApplicationConstants.SELECTOR_NO_SEATS);
         if (noSeatPopup.isVisible()) {
             noSeatPopup.click();
-            page.waitForTimeout(LONG_DELAY);
+            page.waitForTimeout(ApplicationConstants.LONG_DELAY);
         }
-        page.waitForTimeout(LONG_DELAY);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
     }
 
     private ScreenShotData captureScreenshot(Page page) {
-        page.waitForTimeout(LONG_DELAY);
+        page.waitForTimeout(ApplicationConstants.LONG_DELAY);
         page.evaluate("window.stop()");
         byte[] bytes = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
         return new ScreenShotData("scr" + System.currentTimeMillis() + ".png", bytes);
     }
 
     private String createZipArchiveOfScreenshotSequence(List<ScreenShotData> screenShots) {
-        new File(ARCHIVE_DIR).mkdirs();
-        String zipPath = String.format("%s/Archive#_%d.zip", ARCHIVE_DIR, System.currentTimeMillis());
+        new File(ApplicationConstants.ARCHIVE_DIR).mkdirs();
+        String zipPath = String.format("%s/Archive#_%d.zip", ApplicationConstants.ARCHIVE_DIR, System.currentTimeMillis());
         try (FileOutputStream fileOutputStream = new FileOutputStream(zipPath);
              ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream)) {
             for (ScreenShotData entry : screenShots) {
