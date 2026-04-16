@@ -20,11 +20,11 @@ services:
 
   db:
     image: postgres:18-alpine
-    container_name: postgres-db
+    container_name: postgres_db
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=userDb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=19732846
     volumes:
