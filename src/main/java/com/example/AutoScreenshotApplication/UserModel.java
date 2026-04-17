@@ -16,14 +16,13 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false,length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false,length = 100)
-    private String eMail;
+    @Column(nullable = false, length = 100)
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private UserSex sex;
-
 
 }

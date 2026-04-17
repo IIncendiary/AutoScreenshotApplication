@@ -17,9 +17,9 @@ import java.util.zip.ZipOutputStream;
 @Service
 public class ScreenshotService {
 
-
     private Playwright playwright;
     private Browser browser;
+
     @PostConstruct
     public void init() {
         playwright = Playwright.create();
@@ -30,7 +30,7 @@ public class ScreenshotService {
     private final List<String> citiesWhere = (Arrays.asList("Київ", "Дніпро", "Одесса", "Харків", "Запоріжжя "));
 
     public String makeScreenShot(String url) {
-        List<ScreenShotData> screenshots = new ArrayList<>();
+        List<ScreenshotData> screenshots = new ArrayList<>();
 
         try (BrowserContext context = browser.newContext(new Browser.NewContextOptions().setViewportSize(1920, 1080))) {
             Page page = context.newPage();
@@ -118,19 +118,18 @@ public class ScreenshotService {
         page.waitForTimeout(ApplicationConstants.LONG_DELAY);
     }
 
-    private ScreenShotData captureScreenshot(Page page) {
+    private ScreenshotData captureScreenshot(Page page) {
         page.waitForTimeout(ApplicationConstants.LONG_DELAY);
         page.evaluate("window.stop()");
         byte[] bytes = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
-        return new ScreenShotData("scr" + System.currentTimeMillis() + ".png", bytes);
+        return new ScreenshotData("scr" + System.currentTimeMillis() + ".png", bytes);
     }
 
-    private String createZipArchiveOfScreenshotSequence(List<ScreenShotData> screenShots) {
+    private String createZipArchiveOfScreenshotSequence(List<ScreenshotData> screenShots) {
         new File(ApplicationConstants.ARCHIVE_DIR).mkdirs();
         String zipPath = String.format("%s/Archive#_%d.zip", ApplicationConstants.ARCHIVE_DIR, System.currentTimeMillis());
-        try (FileOutputStream fileOutputStream = new FileOutputStream(zipPath);
-             ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream)) {
-            for (ScreenShotData entry : screenShots) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(zipPath); ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream)) {
+            for (ScreenshotData entry : screenShots) {
                 zipOutputStream.putNextEntry(new ZipEntry(entry.name));
                 zipOutputStream.write(entry.bytes);
                 zipOutputStream.closeEntry();
@@ -139,10 +138,6 @@ public class ScreenshotService {
         } catch (Exception e) {
             throw new RuntimeException("Cannot create an archive", e);
         }
-
-    }
-
-    private record ScreenShotData(String name, byte[] bytes) {
 
     }
 

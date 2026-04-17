@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AutoScreenshotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AutoScreenshotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AutoScreenshotApplication.class, args);
+    }
 
 }
