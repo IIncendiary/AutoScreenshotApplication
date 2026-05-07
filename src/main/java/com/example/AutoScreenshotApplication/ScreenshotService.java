@@ -16,7 +16,8 @@ import java.util.zip.ZipOutputStream;
 
 @Service
 public class ScreenshotService {
-
+    AttachmentService attachmentService;
+    ArchiveService archiveService;
     private Playwright playwright;
     private Browser browser;
 
@@ -49,7 +50,10 @@ public class ScreenshotService {
                 }
                 screenshots.add(captureScreenshot(bookingPage));
             }
-            return createZipArchiveOfScreenshotSequence(screenshots);
+            ArchiveMetadata archiveMetadata = archiveService.createArchive(screenshots);
+            attachmentService.createAttachment(archiveMetadata);
+
+            return archiveMetadata.getFilePath();
         } catch (Exception e) {
             return "error";
         }
@@ -125,21 +129,6 @@ public class ScreenshotService {
         return new ScreenshotData("scr" + System.currentTimeMillis() + ".png", bytes);
     }
 
-    private String createZipArchiveOfScreenshotSequence(List<ScreenshotData> screenShots) {
-        new File(ApplicationConstants.ARCHIVE_DIR).mkdirs();
-        String zipPath = String.format("%s/Archive#_%d.zip", ApplicationConstants.ARCHIVE_DIR, System.currentTimeMillis());
-        try (FileOutputStream fileOutputStream = new FileOutputStream(zipPath); ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream)) {
-            for (ScreenshotData entry : screenShots) {
-                zipOutputStream.putNextEntry(new ZipEntry(entry.name));
-                zipOutputStream.write(entry.bytes);
-                zipOutputStream.closeEntry();
-            }
-            return zipPath;
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot create an archive", e);
-        }
-
-    }
 
     @PreDestroy
     public void cleanup() {
