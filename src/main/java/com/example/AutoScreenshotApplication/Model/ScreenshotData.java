@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication;
+package com.example.AutoScreenshotApplication.Model;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 public class ScreenshotData {
-    String name;
-    byte[] bytes;
+    private String name;
+    private byte[] bytes;
 }

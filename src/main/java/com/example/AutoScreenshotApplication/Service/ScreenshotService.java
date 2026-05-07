@@ -1,18 +1,17 @@
-package com.example.AutoScreenshotApplication;
+package com.example.AutoScreenshotApplication.Service;
 
+import com.example.AutoScreenshotApplication.Utility.ApplicationConstants;
+import com.example.AutoScreenshotApplication.Model.ArchiveMetadata;
+import com.example.AutoScreenshotApplication.Model.ScreenshotData;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.LoadState;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 @Service
 public class ScreenshotService {

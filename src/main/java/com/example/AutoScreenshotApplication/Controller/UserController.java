@@ -1,5 +1,7 @@
-package com.example.AutoScreenshotApplication;
+package com.example.AutoScreenshotApplication.Controller;
 
+import com.example.AutoScreenshotApplication.DTO.UserDto;
+import com.example.AutoScreenshotApplication.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

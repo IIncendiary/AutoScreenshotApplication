@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication;
+package com.example.AutoScreenshotApplication.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArchiveMetadata {
-    LocalDateTime creationTime = LocalDateTime.now();
-    String filePath;
+    private LocalDateTime creationTime;
+    private String filePath;
 }
