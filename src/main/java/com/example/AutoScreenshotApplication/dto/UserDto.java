@@ -1,6 +1,6 @@
-package com.example.AutoScreenshotApplication.DTO;
+package com.example.AutoScreenshotApplication.dto;
 
-import com.example.AutoScreenshotApplication.Utility.UserSex;
+import com.example.AutoScreenshotApplication.utility.UserSex;
 import lombok.Data;
 
 @Data

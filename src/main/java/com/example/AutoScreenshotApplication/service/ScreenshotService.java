@@ -1,17 +1,15 @@
-package com.example.AutoScreenshotApplication.Service;
+package com.example.AutoScreenshotApplication.service;
 
-import com.example.AutoScreenshotApplication.Utility.ApplicationConstants;
-import com.example.AutoScreenshotApplication.Model.ArchiveMetadata;
-import com.example.AutoScreenshotApplication.Model.ScreenshotData;
+import com.example.AutoScreenshotApplication.utility.ApplicationConstants;
+import com.example.AutoScreenshotApplication.model.ArchiveMetadata;
+import com.example.AutoScreenshotApplication.model.ScreenshotData;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.LoadState;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ScreenshotService {
@@ -22,8 +20,18 @@ public class ScreenshotService {
 
     @PostConstruct
     public void init() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        try {
+            Map<String,String> env = new HashMap<>();
+            env.put("PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD", "1");
+            playwright = Playwright.create(new Playwright.CreateOptions().setEnv(env));
+            browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+            throw e;
+        }
+
+
     }
 
     private final List<String> citiesFrom = (Arrays.asList("Одесса", "Харків", "Київ", "Дніпро", "Тернопіль"));

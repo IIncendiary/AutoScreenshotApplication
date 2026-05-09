@@ -1,6 +1,6 @@
-package com.example.AutoScreenshotApplication.Model;
+package com.example.AutoScreenshotApplication.model;
 
-import com.example.AutoScreenshotApplication.Utility.UserSex;
+import com.example.AutoScreenshotApplication.utility.UserSex;
 import jakarta.persistence.*;
 import lombok.*;
 

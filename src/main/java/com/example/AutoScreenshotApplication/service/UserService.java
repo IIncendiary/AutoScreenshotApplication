@@ -1,10 +1,10 @@
-package com.example.AutoScreenshotApplication.Service;
+package com.example.AutoScreenshotApplication.service;
 
 
-import com.example.AutoScreenshotApplication.DTO.UserDto;
-import com.example.AutoScreenshotApplication.Mapper.UserMapper;
-import com.example.AutoScreenshotApplication.Model.UserModel;
-import com.example.AutoScreenshotApplication.Repository.UserRepository;
+import com.example.AutoScreenshotApplication.dto.UserDto;
+import com.example.AutoScreenshotApplication.mapper.UserMapper;
+import com.example.AutoScreenshotApplication.model.UserModel;
+import com.example.AutoScreenshotApplication.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

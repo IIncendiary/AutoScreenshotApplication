@@ -1,6 +1,6 @@
-package com.example.AutoScreenshotApplication.Controller;
+package com.example.AutoScreenshotApplication.controller;
 
-import com.example.AutoScreenshotApplication.Service.ScreenshotService;
+import com.example.AutoScreenshotApplication.service.ScreenshotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

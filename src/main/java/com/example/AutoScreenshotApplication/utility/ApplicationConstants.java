@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication.Utility;
+package com.example.AutoScreenshotApplication.utility;
 
 import lombok.Data;
 

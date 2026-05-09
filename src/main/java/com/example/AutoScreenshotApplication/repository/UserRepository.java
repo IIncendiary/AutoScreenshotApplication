@@ -1,6 +1,6 @@
-package com.example.AutoScreenshotApplication.Repository;
+package com.example.AutoScreenshotApplication.repository;
 
-import com.example.AutoScreenshotApplication.Model.UserModel;
+import com.example.AutoScreenshotApplication.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

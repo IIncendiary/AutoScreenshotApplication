@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication.Model;
+package com.example.AutoScreenshotApplication.model;
 
 
 import jakarta.persistence.*;
@@ -16,17 +16,17 @@ import java.time.LocalDateTime;
 public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int archiveId;
+    int id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "storage_path")
     String storagePath;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "file_name")
     String fileName;
 
-    @Column(nullable = false)
+    @Column(name = "size")
     long size;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "creation_time")
     LocalDateTime creationTime;
 }

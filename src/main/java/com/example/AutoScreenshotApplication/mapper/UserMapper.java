@@ -1,7 +1,7 @@
-package com.example.AutoScreenshotApplication.Mapper;
+package com.example.AutoScreenshotApplication.mapper;
 
-import com.example.AutoScreenshotApplication.DTO.UserDto;
-import com.example.AutoScreenshotApplication.Model.UserModel;
+import com.example.AutoScreenshotApplication.dto.UserDto;
+import com.example.AutoScreenshotApplication.model.UserModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
