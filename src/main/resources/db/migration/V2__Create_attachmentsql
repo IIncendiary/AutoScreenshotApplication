@@ -1,7 +1,0 @@
-CREATE TABLE archive_attachment (
-    id BIGSERIAL PRIMARY KEY,
-    storage_path VARCHAR(100) NOT NULL,
-    file_name VARCHAR(20) NOT NULL ,
-    size BIGINT NOT NULL ,
-    creation_time TIMESTAMP NOT NULL
-);

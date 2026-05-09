@@ -3,8 +3,10 @@ package com.example.AutoScreenshotApplication.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "archive_attachment")
@@ -29,4 +31,8 @@ public class Attachment {
 
     @Column(name = "creation_time")
     LocalDateTime creationTime;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserModel owner;
 }

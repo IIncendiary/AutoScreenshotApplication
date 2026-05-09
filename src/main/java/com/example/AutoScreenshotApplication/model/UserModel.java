@@ -4,6 +4,9 @@ import com.example.AutoScreenshotApplication.utility.UserSex;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Setter
@@ -26,4 +29,6 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private UserSex sex;
 
+    @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true)
+    private List<Attachment> archiveAttachments = new ArrayList<>();
 }
