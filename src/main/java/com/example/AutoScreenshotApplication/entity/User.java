@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication.model;
+package com.example.AutoScreenshotApplication.entity;
 
 import com.example.AutoScreenshotApplication.utility.UserSex;
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserModel {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

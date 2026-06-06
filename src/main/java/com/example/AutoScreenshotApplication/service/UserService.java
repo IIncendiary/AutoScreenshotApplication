@@ -3,7 +3,7 @@ package com.example.AutoScreenshotApplication.service;
 
 import com.example.AutoScreenshotApplication.dto.UserDto;
 import com.example.AutoScreenshotApplication.mapper.UserMapper;
-import com.example.AutoScreenshotApplication.model.UserModel;
+import com.example.AutoScreenshotApplication.entity.User;
 import com.example.AutoScreenshotApplication.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserDto> findAllUsers() {
-        List<UserModel> userModelList = userRepository.findAll();
+        List<User> userModelList = userRepository.findAll();
         return userModelList.stream().map(userMapper::toDto).toList();
     }
 
     @Transactional
     public void createUser(UserDto userDto) {
-        userRepository.save(userMapper.toModel(userDto));
+        userRepository.save(userMapper.toEntity(userDto));
     }
 
     @Transactional(readOnly = true)
@@ -36,10 +36,8 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(Long id, UserDto userDto) {
-        UserModel existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No user with such id" + id));
-        userMapper.updateEntityFromDto(userDto, existingUser);
-        userRepository.save(existingUser);
+    public void updateUser(UserDto userDto) {
+        userRepository.save(userMapper.toEntity(userDto));
     }
 
     @Transactional

@@ -1,8 +1,8 @@
 package com.example.AutoScreenshotApplication.service;
 
 
-import com.example.AutoScreenshotApplication.model.ArchiveMetadata;
-import com.example.AutoScreenshotApplication.model.Attachment;
+import com.example.AutoScreenshotApplication.entity.ArchiveMetadata;
+import com.example.AutoScreenshotApplication.entity.Attachment;
 import com.example.AutoScreenshotApplication.repository.AttachmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

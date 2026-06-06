@@ -26,7 +26,7 @@ public class UserController {
 
     @PutMapping("/{userId}/update")
     public void updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
-        userService.updateUser(userId, userDto);
+        userService.updateUser(userDto);
     }
 
     @DeleteMapping("/{userId}/delete")
@@ -34,7 +34,7 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
-    @GetMapping("/allUsers")
+    @GetMapping("/all")
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers();
     }

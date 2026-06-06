@@ -1,4 +1,4 @@
-package com.example.AutoScreenshotApplication.model;
+package com.example.AutoScreenshotApplication.entity;
 
 import lombok.*;
 

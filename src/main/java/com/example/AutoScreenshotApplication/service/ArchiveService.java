@@ -1,8 +1,8 @@
 package com.example.AutoScreenshotApplication.service;
 
 import com.example.AutoScreenshotApplication.utility.ApplicationConstants;
-import com.example.AutoScreenshotApplication.model.ArchiveMetadata;
-import com.example.AutoScreenshotApplication.model.ScreenshotData;
+import com.example.AutoScreenshotApplication.entity.ArchiveMetadata;
+import com.example.AutoScreenshotApplication.entity.ScreenshotData;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

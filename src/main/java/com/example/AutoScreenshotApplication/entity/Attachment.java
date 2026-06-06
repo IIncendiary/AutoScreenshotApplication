@@ -1,12 +1,10 @@
-package com.example.AutoScreenshotApplication.model;
+package com.example.AutoScreenshotApplication.entity;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "archive_attachment")
@@ -34,5 +32,5 @@ public class Attachment {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private UserModel owner;
+    private User owner;
 }
